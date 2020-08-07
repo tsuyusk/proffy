@@ -67,7 +67,7 @@
   justify-content: space-evenly;
   width: 20rem;
   height: 5.6rem;
-  background: var(--color-secundary);
+  background: var(--color-secondary);
   color: var(--color-button-text);
   border: 0;
   border-radius: 0.8rem;

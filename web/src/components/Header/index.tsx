@@ -9,9 +9,10 @@ import './styles.css';
 
 interface HeaderProps {
   title: string;
+  description?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, children }) => {
+const Header: React.FC<HeaderProps> = ({ title, description, children }) => {
   return (
     <header className="page-header">
       <div className="top-bar-container">
@@ -22,6 +23,7 @@ const Header: React.FC<HeaderProps> = ({ title, children }) => {
       </div>
       <div className="header-content">
         <strong>{title}</strong>
+        {description && <p>{description}</p>}
         {children}
       </div>
     </header>

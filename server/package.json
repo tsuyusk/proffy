@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "node dist/src/server.js",
     "dev:server": "ts-node-dev --inspect --respawn --ignore-watch node_modules --transpile-only src/server.ts",
-    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
-    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
+    "knex:migrate:production": "knex --knexfile dist/knexfile.js migrate:latest",
+    "knex:migrate:rollback:production": "knex --knexfile dist/knexfile.js migrate:latest",
+    "knex:migrate": "knex --knexfile src/knexfile.ts migrate:latest",
+    "knex:migrate:rollback": "knex --knexfile src/knexfile.ts migrate:rollback"
   },
   "devDependencies": {
     "@types/cors": "^2.8.7",
