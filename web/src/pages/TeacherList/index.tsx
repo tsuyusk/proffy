@@ -1,23 +1,13 @@
 import React, { useState, FormEvent } from 'react';
 
 import Header from '../../components/Header';
-import TeacherItem from '../../components/TeacherItem';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 
 import Select from '../../components/Select';
 import Input from '../../components/Input';
 
 import './styles.css';
 import api from '../../services/api';
-
-interface Teacher {
-  id: number;
-  name: string;
-  avatar: string;
-  subject: string;
-  description: string;
-  price: number;
-  whatsapp: string;
-}
 
 const TeacherList: React.FC = () => {
   const [teachers, setTeachers] = useState([]);
@@ -26,6 +16,8 @@ const TeacherList: React.FC = () => {
   const [time, setTime] = useState('');
 
   async function searchForTeachers(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     const response = await api.get('/classes', {
       params: {
         subject,

@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 import './styles.css';
@@ -30,6 +31,8 @@ const TeacherForm: React.FC = () => {
     { week_day: 0, from: '', to: '' },
   ]);
 
+  const history = useHistory();
+
   function handleAddScheduleItem() {
     setScheduleItems([...scheduleItems, { week_day: 0, from: '', to: '' }]);
   }
@@ -46,7 +49,10 @@ const TeacherForm: React.FC = () => {
         cost: Number(cost),
         schedule: scheduleItems,
       });
+
       alert('Cadastrado com sucesso');
+
+      history.push('/');
     } catch {
       alert('Erro no cadastro!');
     }
