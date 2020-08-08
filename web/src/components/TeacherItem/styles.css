@@ -61,7 +61,7 @@
   font-size: 1.6rem;
 }
 
-.teacher-item > footer > button {
+.teacher-item > footer > a {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -73,6 +73,7 @@
   border-radius: 0.8rem;
   font: 700 1.4rem Archivo;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 
 @media (min-width: 700px) {

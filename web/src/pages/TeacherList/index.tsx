@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, FormEvent } from 'react';
 
 import Header from '../../components/Header';
 import TeacherItem from '../../components/TeacherItem';
@@ -7,25 +7,40 @@ import Select from '../../components/Select';
 import Input from '../../components/Input';
 
 import './styles.css';
+import api from '../../services/api';
 
-const sampleTeacher = {
-  name: 'Diego Fernandes',
-  subject: 'Química',
-  description:
-    'Entusiasta das melhores tecnologias de química avançada.Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma das minhas explosões.',
-  price: 'R$40,00',
-  avatar_url:
-    'https://avatars2.githubusercontent.com/u/2254731?s=460&u=0ba16a79456c2f250e7579cb388fa18c5c2d7d65&v=4',
-};
+interface Teacher {
+  id: number;
+  name: string;
+  avatar: string;
+  subject: string;
+  description: string;
+  price: number;
+  whatsapp: string;
+}
 
 const TeacherList: React.FC = () => {
+  const [teachers, setTeachers] = useState([]);
   const [subject, setSubject] = useState('');
   const [week_day, setWeek_day] = useState('');
   const [time, setTime] = useState('');
+
+  async function searchForTeachers(event: FormEvent<HTMLFormElement>) {
+    const response = await api.get('/classes', {
+      params: {
+        subject,
+        time,
+        week_day,
+      },
+    });
+
+    setTeachers(response.data);
+  }
+
   return (
     <div id="page-teacher-list" className="container">
       <Header title="Esses são os proffys disponiveis:">
-        <form id="search-teachers">
+        <form id="search-teachers" onSubmit={searchForTeachers}>
           <Select
             options={[
               { value: 'Artes', label: 'Artes' },
@@ -63,15 +78,21 @@ const TeacherList: React.FC = () => {
             autoComplete="off"
           />
 
-          <Input type="time" label="Hora" name="time" autoComplete="off" />
+          <Input
+            value={time}
+            onChange={e => setTime(e.target.value)}
+            type="time"
+            label="Hora"
+            name="time"
+            autoComplete="off"
+          />
+          <button>Buscar</button>
         </form>
       </Header>
       <main>
-        <TeacherItem teacher={sampleTeacher} />
-        <TeacherItem teacher={sampleTeacher} />
-        <TeacherItem teacher={sampleTeacher} />
-        <TeacherItem teacher={sampleTeacher} />
-        <TeacherItem teacher={sampleTeacher} />
+        {teachers.map((teacher: Teacher) => {
+          return <TeacherItem key={teacher.id} teacher={teacher} />;
+        })}
       </main>
     </div>
   );
