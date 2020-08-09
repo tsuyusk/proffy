@@ -5,7 +5,7 @@ Made in august, 2020 during Next Level Week II -> A project made by Rocketseat f
 
 ## How to run
 
-### Putting this project in your machine
+### First, put this project in your machine
 ``` bash
   # Clone this repository
   git clone https://github.com/tsuyusk/proffy
@@ -42,3 +42,20 @@ To run the web version, you have to:
   yarn start / npm start
   # Now, go to http://localhost:3000
 ```
+
+### Mobile
+To run the mobile version, you have to first install ' Expo client ' / ' Expo ' in your cellphone, and then:
+```bash
+  # Go to the mobile folder
+  cd mobile
+  
+  # Install dependencies
+  yarn / npm install
+  
+  # Start the project
+  yarn start / npm start
+  
+  # Go to Expo Dev tools ( http://localhost:19002 ) and scan the QR Code using ' Expo client' or ' Expo ' 
+  # If The Teachers list does not work, You might have to replace the variable 'ipv4' in mobile/src/server/api.ts with your ipv4
+```
+
